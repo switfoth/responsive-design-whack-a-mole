@@ -1,21 +1,18 @@
 // Write your JS here.
 window.addEventListener('DOMContentLoaded', () => {
 
-    // setInterval(() => {
-    //   const moleHeads = document.querySelectorAll('.mole-head');
-    //   for (let moleHead of moleHeads) {
-    //     moleHead.classList.toggle('mole-head-hidden');
-    //   }
-    // }, 1000);
+    let moleHeadsNode = document.querySelectorAll("img.mole-head");
+    let moleHeads = Array.prototype.slice.call(moleHeadsNode);
 
     let popUpRandomMole = (() =>{
-      let moleHeads = document.querySelectorAll("img.mole-head");
-      let randomNum = Math.floor(Math.random()*7)
+      if(moleHeads.length === 0) return console.log("You win!")
+      let randomNum = Math.floor(Math.random()*(moleHeads.length-1))
       if(!moleHeads[randomNum].classList.contains('whacked')){
         moleHeads[randomNum].classList.toggle('mole-head-hidden')
-        setTimeout(()=>hideMole(moleHeads[randomNum]), 3000)
+        setTimeout(()=>hideMole(moleHeads[randomNum]), 3000);
       } else{
-          popUpRandomMole();
+        moleHeads.splice(randomNum, 1);
+        popUpRandomMole();
       }
     })
 
@@ -28,7 +25,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(popUpRandomMole, 0)
 
-    let moleHeads = document.querySelectorAll("img.mole-head");
     moleHeads.forEach(function(moleHead){
         moleHead.addEventListener('click', () => {
             moleHead.classList.toggle('mole-head-hidden');
