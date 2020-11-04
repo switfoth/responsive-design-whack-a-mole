@@ -11,14 +11,28 @@ window.addEventListener('DOMContentLoaded', () => {
     let popUpRandomMole = (() =>{
       let moleHeads = document.querySelectorAll("img.mole-head");
       let randomNum = Math.floor(Math.random()*7)
-      moleHeads[randomNum].classList.toggle('mole-head-hidden')
-      setTimeout(()=>hideMole(moleHeads[randomNum]), 1000)
+      if(!moleHeads[randomNum].classList.contains('whacked')){
+        moleHeads[randomNum].classList.toggle('mole-head-hidden')
+        setTimeout(()=>hideMole(moleHeads[randomNum]), 3000)
+      } else{
+          popUpRandomMole();
+      }
     })
 
     let hideMole = ((element)=>{
-      element.classList.toggle('mole-head-hidden')
+      if(!element.classList.contains('mole-head-hidden')){
+        element.classList.toggle('mole-head-hidden')
+      }
       setTimeout(popUpRandomMole, 1000)
     })
 
     setTimeout(popUpRandomMole, 0)
+
+    let moleHeads = document.querySelectorAll("img.mole-head");
+    moleHeads.forEach(function(moleHead){
+        moleHead.addEventListener('click', () => {
+            moleHead.classList.toggle('mole-head-hidden');
+            moleHead.classList.add('whacked');
+        });
+    });
   });
