@@ -1,1 +1,21 @@
 /* Write your CSS here. */
+.mole-hill{
+    height: 220px;
+    width: 640px;
+    position: absolute;
+    bottom: 0px;
+}
+
+.mole-head{
+    height: 356px;
+    width: 376px;
+    position: absolute;
+    left: 109px;
+}
+
+.game-board{
+    height: 482px;
+    width: 640px;
+    position: relative;
+    display: inline-block;
+}
